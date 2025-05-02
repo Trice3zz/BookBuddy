@@ -6,7 +6,7 @@ import BookList from './components/BookList.jsx';
 import BookDetail from './components/BookDetail.jsx';
 import LoginRegister from './LoginRegister.jsx';
 import BookCheckout from './BookCheckout.jsx';
-import { UserProvider } from './UserContext.jsx';
+import { UserProvider } from './components/UserContext.jsx';
 import Account from './components/Account.jsx';
 import Login from './components/LoginForm.jsx';
 import Register from './components/RegisterForm.jsx';

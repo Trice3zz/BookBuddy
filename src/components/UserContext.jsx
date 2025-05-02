@@ -11,10 +11,10 @@ export const UserProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      // Replace with actual login API call
       const response = await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/json' }
       });
       const data = await response.json();
       setUser(data.user);
@@ -26,10 +26,10 @@ export const UserProvider = ({ children }) => {
 
   const register = async (username, password) => {
     try {
-      // Replace with actual register API call
       const response = await fetch('/api/register', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/json' }
       });
       const data = await response.json();
       setUser(data.user);
@@ -50,3 +50,5 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
+
+export default UserContext;

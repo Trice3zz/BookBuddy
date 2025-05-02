@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
-import { useAuth } from './UserContext';
+import { useAuth } from './components/UserContext';
 import { fetchBookDetail, checkoutBook } from './api'; // Assuming you've created an API utility
 
 const BookCheckout = () => {

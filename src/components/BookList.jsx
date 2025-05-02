@@ -1,64 +1,94 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import  UserContext  from './UserContext';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
-  const [search, setSearch] = useState("");
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const { data } = await axios.get(
-          "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books"
-        );
-        setBooks(data.books);
+        const { data } = await axios.get('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books');
+        setBooks(data?.books || []);
       } catch (error) {
-        console.error("Failed to fetch books:", error);
+        console.error('Error fetching books:', error);
       }
     };
-
     fetchBooks();
   }, []);
 
-  const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleCheckout = async (bookId) => {
+    try {
+      await axios.post(
+        `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}/checkout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
+      );
+      alert('Book checked out!');
+      setBooks((prevBooks) =>
+        prevBooks.map((b) =>
+          b.id === bookId ? { ...b, available: false } : b
+        )
+      );
+    } catch (error) {
+      console.error('Checkout failed:', error);
+      alert('Failed to check out book');
+    }
+  };
+
+  if (!books.length) return <p className="text-center p-4">Loading books...</p>;
 
   return (
-    <section className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-6 text-indigo-700">📚 Library Catalog</h2>
-
-      <div className="mb-6 flex justify-center">
-        <input
-          type="text"
-          placeholder="Search books..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full sm:w-96 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-      </div>
-
-      <ul className="space-y-4" role="list">
-        {filteredBooks.length > 0 ? (
-          filteredBooks.map((book) => (
-            <li
-              key={book.id}
-              className="bg-white p-4 rounded-xl shadow hover:shadow-md transition"
+    <div className="max-w-6xl mx-auto p-6">
+      <h2 className="text-3xl font-bold text-center mb-6 text-indigo-700">📚 Book List</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        {books.map((book) => (
+          <div
+            key={book.id}
+            className="bg-white p-4 rounded shadow hover:shadow-lg transition flex flex-col items-center"
+          >
+            {book.coverimage ? (
+              <img
+                src={book.coverimage}
+                alt={book.title}
+                className="w-full h-48 object-cover mb-2 rounded"
+              />
+            ) : (
+              <div className="w-full h-48 bg-gray-200 flex items-center justify-center mb-2 rounded">
+                No Cover
+              </div>
+            )}
+            <h3 className="font-medium text-indigo-600 text-center">{book.title}</h3>
+            <p className="text-sm text-gray-500 text-center mb-1">
+              {book.author}
+            </p>
+            <p className="text-sm text-gray-600 text-center mb-2">
+              {book.available ? 'Available ✅' : 'Checked out ❌'}
+            </p>
+            <Link
+              to={`/books/${book.id}`}
+              className="text-sm text-blue-500 underline mb-2"
             >
-              <Link to={`/books/${book.id}`} className="text-lg font-medium text-indigo-600 hover:underline">
-                {book.title}
-              </Link>
-              <span className="ml-2 text-sm text-gray-500">
-                {book.available ? "Available ✅" : "Checked out ❌"}
-              </span>
-            </li>
-          ))
-        ) : (
-          <li className="text-center text-gray-500">No books found for "{search}".</li>
-        )}
-      </ul>
-    </section>
+              View Details
+            </Link>
+            {user && book.available && (
+              <button
+                onClick={() => handleCheckout(book.id)}
+                className="mt-auto px-3 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+              >
+                Check Out
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

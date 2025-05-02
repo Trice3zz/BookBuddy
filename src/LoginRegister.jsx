@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
-import { useAuth } from './UserContext';
+import { useAuth } from './components/UserContext';
 
 const LoginRegister = () => {
   const { login, register } = useAuth();
