@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import  UserContext  from './UserContext';
-
+import BookDetail from './BookDetail';
 const BookList = () => {
   const [books, setBooks] = useState([]);
   const { user } = useContext(UserContext);
@@ -11,7 +11,7 @@ const BookList = () => {
     const fetchBooks = async () => {
       try {
         const { data } = await axios.get('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books');
-        setBooks(data?.books || []);
+        setBooks(data|| []);
       } catch (error) {
         console.error('Error fetching books:', error);
       }
@@ -33,7 +33,7 @@ const BookList = () => {
       alert('Book checked out!');
       setBooks((prevBooks) =>
         prevBooks.map((b) =>
-          b.id === bookId ? { ...b, available: false } : b
+          b.id === bookId ? { ...b, available: False } : b
         )
       );
     } catch (error) {
@@ -42,7 +42,7 @@ const BookList = () => {
     }
   };
 
-  if (!books.length) return <p className="text-center p-4">Loading books...</p>;
+  if (!books.length) 
 
   return (
     <div className="max-w-6xl mx-auto p-6">
@@ -89,6 +89,7 @@ const BookList = () => {
         ))}
       </div>
     </div>
+    
   );
 };
 

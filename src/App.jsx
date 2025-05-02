@@ -21,8 +21,8 @@ const Home = () => {
         const { data } = await axios.get(
           'https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books'
         );
-        console.log("Fetched books:", data.books); 
-        setBooks(data?.books || []);
+        console.log("Fetched books:", data); 
+        setBooks(data || []);
       } catch (error) {
         console.error('Failed to fetch books:', error);
       } finally {
@@ -33,27 +33,12 @@ const Home = () => {
     fetchBooks();
   }, []);
 
-  if (loading) {
-    return (
-      <section className="p-6 text-center text-gray-600">
-        <p>Loading books...</p>
-      </section>
-    );
-  }
-
-  return (
+return (
     <section className="p-6 max-w-7xl mx-auto">
       <h2 className="text-4xl font-bold text-center mb-6 text-indigo-700">
         📚 Welcome to BookBuddy
       </h2>
-      <p className="text-center text-gray-600 mb-10 text-lg">
-        Explore our collection of books below. Click on any book to view more details.
-      </p>
-
-      {books.length === 0 ? (
-        <p className="text-center text-red-500">No books available.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {books.slice(0, 8).map((book) => (
             <Link
               to={`/books/${book.id}`}
@@ -78,7 +63,7 @@ const Home = () => {
             </Link>
           ))}
         </div>
-      )}
+      
     </section>
   );
 };

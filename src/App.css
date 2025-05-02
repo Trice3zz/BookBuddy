@@ -11,19 +11,19 @@ nav {
   background: #2c3e50;
   padding: 10px;
   display: flex;
-  gap: 20px;
+  gap: 40px;
   justify-content: center;
 }
 
 nav a {
-  color: #545555;
+  color: #151375;
   text-decoration: none;
   font-weight: bold;
 }
 
 main, .book-details, .auth-form, .account {
   padding: 20px;
-  max-width: 500px;
+  max-width: 200px;
   margin: auto;
 }
 
@@ -42,6 +42,7 @@ h1 {
   padding: 20px;
   margin-top: 10px;
   border-radius: 5px;
+  max-width: 100px;
 }
 
 .book-card h3 {
@@ -66,7 +67,7 @@ h1 {
 
 .auth-form input {
   display: block;
-  width: 100%;
+  width: 80%;
   margin: 10px 0;
   padding: 10px;
 }

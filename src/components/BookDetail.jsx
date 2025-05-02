@@ -14,7 +14,7 @@ const BookDetail = () => {
     loadBook();
   }, [id]);
 
-  if (!book) return <div>Loading...</div>;
+  if (!book) 
 
   return (
     <div className="book-detail">
