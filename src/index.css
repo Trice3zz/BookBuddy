@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  color: #222;
+}
+
+nav {
+  background: #2c3e50;
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main, .book-details, .auth-form, .account {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  text-align: center;
+  color: #34495e;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  margin-top: 20px;
+}
+
+.book-card, .auth-form, .book-details {
+  background: #350af7;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.book-card h3 {
+  margin: 0 0 10px;
+}
+
+.details-button {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #2980b9;
+  color: rgb(71, 69, 69);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.details-button:hover {
+  background-color: #1abc9c;
+}
+
+.auth-form input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.auth-form button {
+  padding: 10px;
+  width: 100%;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.auth-form button:hover {
+  background: #2ecc71;
+}
+
+.account button {
+  margin-top: 20px;
+  padding: 10px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
