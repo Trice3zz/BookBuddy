@@ -39,7 +39,7 @@ return (
         📚 Welcome to BookBuddy
       </h2>
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {books.slice(0, 8).map((book) => (
+          {books.slice(0, 40).map((book) => (
             <Link
               to={`/books/${book.id}`}
               key={book.id}
